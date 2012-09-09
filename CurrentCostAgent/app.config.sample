@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="ComPort" value="COM5"/>
+    <add key="BaudRate" value="57600"/>
+    <add key="CosmKey" value="API-KEY-GOES-HERE"/>
+    <add key="PlotWattKey" value="API-KEY-GOES-HERE"/>
+  </appSettings>
+</configuration>
+
