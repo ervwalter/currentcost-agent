@@ -4,6 +4,7 @@
     <add key="ComPort" value="COM5"/>
     <add key="BaudRate" value="57600"/>
     <add key="CosmKey" value="API-KEY-GOES-HERE"/>
+    <add key="CosmFeedId" value="FEED-ID-GOES-HERE"/>
     <add key="PlotWattKey" value="API-KEY-GOES-HERE"/>
   </appSettings>
 </configuration>

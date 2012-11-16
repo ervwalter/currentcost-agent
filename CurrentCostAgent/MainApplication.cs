@@ -24,6 +24,7 @@ namespace CurrentCostAgent
         private string _comPort;
         private int _baudRate;
         private string _cosmKey;
+        private string _cosmFeedId;
         private string _plotWattKey;
 
         private const int UploadFrequency = 30;
@@ -57,6 +58,7 @@ namespace CurrentCostAgent
             _comPort = ConfigurationManager.AppSettings["ComPort"];
             _baudRate = int.Parse(ConfigurationManager.AppSettings["BaudRate"]);
             _cosmKey = ConfigurationManager.AppSettings["CosmKey"];
+            _cosmFeedId = ConfigurationManager.AppSettings["CosmFeedId"];
             _plotWattKey = ConfigurationManager.AppSettings["PlotWattKey"];
             _statusForm.StartPosition = FormStartPosition.Manual;
             _statusForm.Top = Screen.PrimaryScreen.WorkingArea.Bottom - _statusForm.Height;
@@ -141,11 +143,11 @@ namespace CurrentCostAgent
             }
 
             WebClient cosmClient = new WebClient();
-            foreach (var feedId in feeds.Keys)
+            foreach (var subFeedId in feeds.Keys)
             {
-                string cosmUrl = string.Format("http://api.cosm.com/v2/feeds/71541/datastreams/{0}/datapoints?key={1}", feedId, _cosmKey);
+                string cosmUrl = string.Format("http://api.cosm.com/v2/feeds/{0}/datastreams/{1}/datapoints?key={2}", _cosmFeedId, subFeedId, _cosmKey);
                 JObject cosm = new JObject();
-                cosm["datapoints"] = feeds[feedId];
+                cosm["datapoints"] = feeds[subFeedId];
                 string cosmData = cosm.ToString();
                 cosmClient.UploadString(cosmUrl, cosmData);
             }
